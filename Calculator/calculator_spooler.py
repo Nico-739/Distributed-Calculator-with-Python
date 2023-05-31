@@ -40,15 +40,18 @@ print("Spooler is running and listening for connections...")
 while True:
     # Accept a connection from the Client
     client_socket, address = spooler_socket.accept()
+    print(f"Connected to client: {address}")
 
     # Receive the request from the Client
     request = client_socket.recv(1024).decode()
+    print(f"Received request: {request}")
 
     # Distribute the request to a Calculator and get the result
     result = distribute_request(request)
 
     # Send the result back to the Client
     client_socket.send(result.encode())
+    print("Sent result back to the client")
 
     # Close the connection to the Client
     client_socket.close()

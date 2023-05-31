@@ -24,12 +24,15 @@ print("Logger is running and listening for connections...")
 while True:
     # Accept a connection from the Spooler
     spooler_socket, address = logger_socket.accept()
+    print(f"Connected to Spooler: {address}")
 
     # Receive the request from the Spooler
     request = spooler_socket.recv(1024).decode()
+    print(f"Received request: {request}")
 
     # Receive the result from the Spooler
     result = spooler_socket.recv(1024).decode()
+    print(f"Received result: {result}")
 
     # Log the request and result
     log_request_result(request, result)

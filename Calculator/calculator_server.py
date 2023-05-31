@@ -21,6 +21,7 @@ def handle_client(client_socket, address):
 
     # Receive the request from the client
     request = client_socket.recv(1024).decode()
+    print("Received request:", request)  # Debugging statement
     operation, operand1, operand2 = request.split(',')
 
     # Distribute the request to the calculators
