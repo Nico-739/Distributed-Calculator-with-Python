@@ -10,7 +10,7 @@ port = 7000  # Port number for Spooler
 spooler_socket.bind((host, port))
 
 # List of available Calculators
-calculator_addresses = [('calculator1_ip', 9001), ('calculator2_ip', 9002)]
+calculator_addresses = [('127.0.0.1', 9001), ('127.0.0.1', 9002)]
 
 # Function to distribute requests to Calculators
 def distribute_request(request):

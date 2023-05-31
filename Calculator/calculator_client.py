@@ -3,7 +3,7 @@ import socket
 
 # Create a client socket
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-host = 'netnode_ip_address'  # Replace with the actual IP address of the NetNode
+host = '127.0.0.1'  # Replace with the actual IP address of the NetNode
 port = 8000  # Port number used by the NetNode
 
 # Connect to the NetNode
