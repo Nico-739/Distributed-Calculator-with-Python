@@ -40,3 +40,7 @@ def handle_client(client_socket, calculator):
 
     # Close the client socket
     client_socket.close()
+    
+
+# Calculator instance
+calculator = Calculator()
