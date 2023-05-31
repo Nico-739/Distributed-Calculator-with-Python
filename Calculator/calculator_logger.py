@@ -1,4 +1,5 @@
 import socket
+import threading
 from datetime import datetime
 
 # Create a Logger socket
@@ -15,6 +16,26 @@ def log_request_result(request, result):
     log_entry = f"{timestamp} - Request: {request}, Result: {result}\n"
     with open("calculator_logs.txt", "a") as file:
         file.write(log_entry)
+    print(f"Logged request and result: {request}, {result}")
+
+# Function to handle client connections
+def handle_client(client_socket, address):
+    print(f"Connected to Spooler: {address}")
+
+    # Receive the request from the client
+    request = client_socket.recv(1024).decode()
+    print(f"Received request: {request}")
+
+    # Receive the result from the client
+    result = client_socket.recv(1024).decode()
+    print(f"Received result: {result}")
+
+    # Log the request and result
+    log_request_result(request, result)
+
+    # Close the client socket
+    client_socket.close()
+    print(f"Disconnected from Spooler: {address}")
 
 # Start listening for connections from the Spooler
 logger_socket.listen()
@@ -22,20 +43,9 @@ logger_socket.listen()
 print("Logger is running and listening for connections...")
 
 while True:
-    # Accept a connection from the Spooler
-    spooler_socket, address = logger_socket.accept()
-    print(f"Connected to Spooler: {address}")
+    # Accept a client connection
+    client_socket, address = logger_socket.accept()
 
-    # Receive the request from the Spooler
-    request = spooler_socket.recv(1024).decode()
-    print(f"Received request: {request}")
-
-    # Receive the result from the Spooler
-    result = spooler_socket.recv(1024).decode()
-    print(f"Received result: {result}")
-
-    # Log the request and result
-    log_request_result(request, result)
-
-    # Close the connection to the Spooler
-    spooler_socket.close()
+    # Handle the client request in a separate thread
+    client_thread = threading.Thread(target=handle_client, args=(client_socket, address))
+    client_thread.start()
