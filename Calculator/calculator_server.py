@@ -44,3 +44,17 @@ def handle_client(client_socket, calculator):
 
 # Calculator instance
 calculator = Calculator()
+
+
+# Start the server and handle client connections
+server_socket.listen(5)  # Listen for up to 5 client connections
+
+print(f"Server started and listening on {host}:{port}...")
+
+while True:
+    client_socket, address = server_socket.accept()
+    print(f"New connection from {address[0]}:{address[1]}")
+
+    # Create a new thread to handle the client
+    client_thread = threading.Thread(target=handle_client, args=(client_socket, calculator))
+    client_thread.start()
