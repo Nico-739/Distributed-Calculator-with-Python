@@ -4,13 +4,13 @@ import random
 # Create a Spooler socket
 spooler_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 host = '0.0.0.0'  # Listen on all network interfaces
-port = 8000  # Port number for Spooler
+port = 7000  # Port number for Spooler
 
 # Bind the socket to the host and port
 spooler_socket.bind((host, port))
 
 # List of available Calculators
-calculator_addresses = [('calculator1_ip', 9000), ('calculator2_ip', 9001)]
+calculator_addresses = [('calculator1_ip', 9001), ('calculator2_ip', 9002)]
 
 # Function to distribute requests to Calculators
 def distribute_request(request):

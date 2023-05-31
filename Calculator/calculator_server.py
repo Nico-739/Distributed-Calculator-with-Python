@@ -11,8 +11,8 @@ netnode_socket.bind((host, port))
 
 # Define the list of calculator addresses
 calculator_addresses = [
-    ('calculator1_ip_address', 9000),  # Replace with the actual IP address of Calculator 1
-    ('calculator2_ip_address', 9000)  # Replace with the actual IP address of Calculator 2
+    ('calculator1_ip_address', 9001),  # Replace with the actual IP address of Calculator 1
+    ('calculator2_ip_address', 9002)  # Replace with the actual IP address of Calculator 2
 ]
 
 # Function to handle client requests
