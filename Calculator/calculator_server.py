@@ -10,9 +10,8 @@ port = 8000  # Port number for NetNode
 netnode_socket.bind((host, port))
 
 # Define the list of calculator addresses
-calculator_addresses = [
-    ('127.0.0.1', 9001),  # Replace with the actual IP address of Calculator 1
-    ('127.0.0.1', 9002)  # Replace with the actual IP address of Calculator 2
+spooler_addresses = [
+    ('127.0.0.1', 7000)
 ]
 
 # Function to handle client requests
@@ -25,7 +24,7 @@ def handle_client(client_socket, address):
     operation, operand1, operand2 = request.split(',')
 
     # Distribute the request to the calculators
-    for calc_address in calculator_addresses:
+    for calc_address in spooler_addresses:
         calc_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         calc_socket.connect(calc_address)
         calc_socket.send(request.encode())
@@ -33,7 +32,7 @@ def handle_client(client_socket, address):
 
     # Receive the results from the calculators
     results = []
-    for calc_address in calculator_addresses:
+    for calc_address in spooler_addresses:
         calc_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         calc_socket.connect(calc_address)
         result = calc_socket.recv(1024).decode()
