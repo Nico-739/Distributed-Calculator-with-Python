@@ -32,18 +32,18 @@ print("Calculator A is running and listening for connections...")
 while True:
     # Accept a connection from the Spooler
     spooler_socket, address = calculator_socket.accept()
-    print(f"Connected to Spooler: {address}")
+    print(f"CalcA: Connected to Spooler: {address}")
 
     # Receive the request from the Spooler
     request = spooler_socket.recv(1024).decode()
-    print(f"Received request: {request}")
+    print(f"CalcA: Received request: {request}")
 
     # Perform the calculation
     result = perform_calculation(request)
 
     # Send the result back to the Spooler
     spooler_socket.send(result.encode())
-    print(f"Sent result: {result}")
+    print(f"CalcA: Sent result: {result}")
 
     # Close the connection to the Spooler
     spooler_socket.close()

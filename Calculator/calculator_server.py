@@ -16,11 +16,11 @@ spooler_addresses = [
 
 # Function to handle client requests
 def handle_client(client_socket, address):
-    print(f"Connected to client: {address}")
+    print(f"Server: Connected to client: {address}")
 
     # Receive the request from the client
     request = client_socket.recv(1024).decode()
-    print("Received request:", request)  # Debugging statement
+    print("Server: Received request:", request)  # Debugging statement
     operation, operand1, operand2 = request.split(',')
 
     # Distribute the request to the calculators
@@ -45,12 +45,12 @@ def handle_client(client_socket, address):
 
     # Close the client socket
     client_socket.close()
-    print(f"Disconnected from client: {address}")
+    print(f"Server: Disconnected from client: {address}")
 
 # Start listening for client connections
 netnode_socket.listen()
 
-print("NetNode is running and listening for client connections...")
+print("Server: Is running and listening for client connections...")
 
 while True:
     # Accept a client connection

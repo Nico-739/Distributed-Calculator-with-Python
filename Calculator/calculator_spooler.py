@@ -23,11 +23,11 @@ def distribute_request(request):
 
     # Send the request to the Calculator
     calculator_socket.send(request.encode())
-    print(f"Sent request to Calculator: {calculator_address}")
+    print(f"Spooler: Sent request to Calculator: {calculator_address}")
 
     # Receive the result from the Calculator
     result = calculator_socket.recv(1024).decode()
-    print(f"Received result from Calculator: {calculator_address}")
+    print(f"Spooler: Received result from Calculator: {calculator_address}")
 
     # Close the connection to the Calculator
     calculator_socket.close()
@@ -42,20 +42,20 @@ print("Spooler is running and listening for connections...")
 while True:
     # Accept a connection
     client_socket, address = spooler_socket.accept()
-    print(f"Connected to client: {address}")
+    print(f"Spooler: Connected to client: {address}")
 
     # Receive the request
     request = client_socket.recv(1024).decode()
-    print(f"Received request: {request}")
+    print(f"Spooler: Received request: {request}")
 
     # Distribute the request to a Calculator and get the result
     result = distribute_request(request)
-    print(f"Distributed request to Calculators")
+    print(f"Spooler: Distributed request to Calculators")
 
     # Send the result back to the Client
     client_socket.send(result.encode())
-    print(f"Sent result to client")
+    print(f"Spooler: Sent result to client")
 
     # Close the connection
     client_socket.close()
-    print(f"Disconnected from client: {address}")
+    print(f"Spooler: Disconnected from client: {address}")

@@ -20,22 +20,22 @@ def log_request_result(request, result):
 
 # Function to handle client connections
 def handle_client(client_socket, address):
-    print(f"Connected to Spooler: {address}")
+    print(f"Logger: Connected to Spooler: {address}")
 
     # Receive the request from the client
     request = client_socket.recv(1024).decode()
-    print(f"Received request: {request}")
+    print(f"Logger: Received request: {request}")
 
     # Receive the result from the client
     result = client_socket.recv(1024).decode()
-    print(f"Received result: {result}")
+    print(f"Logger: Received result: {result}")
 
     # Log the request and result
     log_request_result(request, result)
 
     # Close the client socket
     client_socket.close()
-    print(f"Disconnected from Spooler: {address}")
+    print(f"Logger: Disconnected from Spooler: {address}")
 
 # Start listening for connections from the Spooler
 logger_socket.listen()
